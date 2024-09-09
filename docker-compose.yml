@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:9.0.1
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - sdd-db-network
+    restart: on-failure
+
+  phpmyadmin:
+    image: phpmyadmin
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: ${DB_USERNAME}
+      PMA_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "9090:80"
+    networks:
+      - sdd-db-network
+    restart: on-failure
+volumes:
+  mysql-data:
+    driver: local
+networks:
+  sdd-db-network:
+    driver: bridge
