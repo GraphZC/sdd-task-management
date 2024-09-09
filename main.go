@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	config "github.com/GraphZC/sdd-task-management/configs"
+	"github.com/GraphZC/sdd-task-management/configs"
 	"github.com/GraphZC/sdd-task-management/domain/usecases"
 	"github.com/GraphZC/sdd-task-management/internal/adapters/mysql"
 	"github.com/GraphZC/sdd-task-management/internal/adapters/rest"
@@ -20,7 +20,7 @@ func main() {
 
 	ctx := context.Background()
 
-	cfg := config.NewConfig()
+	cfg := configs.NewConfig()
 
 	db, err := sqlx.ConnectContext(ctx, "mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", cfg.DBUsername, cfg.DBPassword, cfg.DBHost, cfg.DBPort, cfg.DBName))
 

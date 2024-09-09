@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	config "github.com/GraphZC/sdd-task-management/configs"
+	"github.com/GraphZC/sdd-task-management/configs"
 	"github.com/GraphZC/sdd-task-management/domain/exceptions"
 	"github.com/GraphZC/sdd-task-management/domain/repositories"
 	"github.com/GraphZC/sdd-task-management/domain/requests"
@@ -20,10 +20,10 @@ type UserUseCase interface {
 
 type userService struct {
 	userRepo repositories.UserRepository
-	config   *config.Config
+	config   *configs.Config
 }
 
-func NewUserService(userRepo repositories.UserRepository, config *config.Config) UserUseCase {
+func NewUserService(userRepo repositories.UserRepository, config *configs.Config) UserUseCase {
 	return &userService{
 		userRepo: userRepo,
 		config:   config,
